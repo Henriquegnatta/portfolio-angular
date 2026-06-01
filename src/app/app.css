@@ -1,0 +1,13 @@
+body{
+    background-color: rgb(192, 192, 245);
+}
+main{
+    background-color: rgb(228, 231, 248);
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 1%;
+    border-radius: 5%;
+    margin-top: 1%;
+    box-shadow: black, 100px, 100px 100px ;
+}
+
