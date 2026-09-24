@@ -30,6 +30,34 @@ const projetos = [
         ano:2026
     }
 ];
+const tecnologias =[
+    {
+    id:1,
+    nome:'HTML',
+    tecnologia:'Frontend',
+    descricao:'Linguagem de marcacao para estrutura de paginas.',
+ ano:'1993'
+    },{
+    id:2,
+    nome:'CSS',
+    tecnologia:'Frontend',
+    descricao:'Linguagem de estilos para apresentacao visual.',
+    ano:'1996'
+    },{
+      id:3,  
+    nome:'JavaScript',
+    tecnologia:'Frontend',
+    descricao:'Linguagem de programacao para o navegador.',
+    ano:'1995'
+    },{
+        id:4,
+        nome:'PHP',
+    tecnologia:'Backend',
+    descricao:'Linguagem server-side para web dinamica.',
+    ano:'1994'
+    }
+
+];
 
 app.get('/',(req,res)=>{
     res.send('API do portfolio em Node: no ar');
@@ -41,6 +69,7 @@ app.listen(PORTA, () => {
 app.get('/api/projetos',(req, res) =>{
     res.json(projetos);
 });
-app.listen(PORTA,() =>{
- console.log('API no ar em http://localhost:' + PORTA);
-})
+
+app.get('/api/tecnologias',(req, res) =>{
+    res.json(tecnologias);
+});
