@@ -6,12 +6,13 @@ o contrato de 'GET /api/projetos' e o mesmo do ' api/projetos.php' feito juntame
 
 Como rodar:
 
+sudo service mariadb start
 cd api-node
-nmp install
 node server.js
 
 A API sobe em http://localhost:3000. Teste com:
 
 curl -1 hhtp://localhost:3000/api/projetos
-
+curl -1 hhtp://localhost:3000/api/projetos/5
 curl -1 hhtp://localhost:3000/api/tecnologias
+
