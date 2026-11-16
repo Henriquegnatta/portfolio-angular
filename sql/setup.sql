@@ -52,7 +52,7 @@ VALUES
 ('App de Tarefas',
  'Lista de tarefas com categorias, prazos e filtro por status.',
  'JavaScript, HTML, CSS',
- 'https://github.com/usuario/tarefas',
+ 'https://github.com/henriquegnatta/tarefas',
  2025,
  'publicado'),
 

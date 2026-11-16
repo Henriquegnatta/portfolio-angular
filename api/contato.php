@@ -6,7 +6,7 @@
 
  if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {http_response_code(204); exit;}
 
- if($SERVER[REQUEST_METHOD] !== 'POST'){
+ if($_SERVER['REQUEST_METHOD'] !== 'POST'){
     http_response_code(405);
     echo json_encode(['erro' => 'Use POST.']);
     exit;
@@ -14,7 +14,7 @@
 
  $dados = json_decode(file_get_contents('php://input'),true);
 
- $nome = trim($dados['nome'] ?? '');
+ $nome = trim($dados['nomea'] ?? '');
  $email = trim($dados['email'] ?? '');
  $mensagem = trim($dados['mensagem'] ?? '');
 
@@ -31,7 +31,9 @@ if(!empty($erros)){
 
 require __DIR__ . '/../conexao.php';
 $sql = 'INSERT INTO contatos (nome, email, mensagem) VALUES (:nome, :email, :mensagem)';
-$stmt->execute([':nome' => $nome, ':email' => $email, ':mensagem' => $mensagem]);
 
+$stmt = $pdo->prepare($sql);
+
+$stmt->execute([':nome' =>$nome, ':email' => $email, ':mensagem' => $mensagem]);
 http_response_code(201);
 echo json_encode(['sucesso' => true,'id' =>(int) $pdo->lastInsertId(),'mensagem' => 'Contato recebido com sucesso' ]);
