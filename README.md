@@ -1,20 +1,46 @@
-## aPI em Node 
+## API em Node
 
-Um segunda versao da API, em javaScript, na pasta 'api-node/'.
-o contrato de 'GET /api/projetos' e o mesmo do ' api/projetos.php' feito juntamente api/tecnologias e e mesmo do que api/tecnologias.php
+Uma segunda versão da API, em JavaScript, na pasta `api-node/`.
+O contrato de `GET /api/projetos` é o mesmo de `api/projetos.php`, e o de `GET /api/tecnologias` é o mesmo de `api/tecnologias.php`.
 
-
-Como rodar:
 
 sudo service mariadb start
+sudo mysql < sql/setup.sql
+sudo mysql < sql/usuarios.sql
 cd api-node
+npm install
+node criar-usuario.js seu@email.com suasenha
 node server.js
 
-A API sobe em http://localhost:3000. Teste com:
+A API sobe em http://localhost:3000. Nas respostas abaixo, aparecem só a linha de status e o corpo.
 
-curl -1 hhtp://localhost:3000/api/projetos
-curl -1 hhtp://localhost:3000/api/projetos/5
-curl -1 hhtp://localhost:3000/api/tecnologias
-curl -i -X POST http://localhost:3000/api/projetos/7 -H "Content-Type: application/json" -d '{"nome:Projeto de teste(editado)","ano:2026}
-curl -i -X PUT http://localhost:3000/api/projetos/7 -H "Content-Type: application/json" -d '{"nome:Projeto de teste(editado)","ano:2026}
-curl -i -X DELETE http://localhost:3000/api/projetos/7
+
+
+curl -i http://localhost:3000/api/projetos
+
+curl -i http://localhost:3000/api/tecnologias
+
+
+curl -i -X POST http://localhost:3000/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"seu@email.com","senha":"suasenha"}'
+
+{"token":"<TOKEN>"}
+
+
+Guarde o valor de `token` numa variável do terminal: `TOKEN=<TOKEN>`. Ele vale por 2 horas.
+
+curl -i -X POST http://localhost:3000/api/projetos \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{"nome":"Projeto de teste","ano":2026}'
+
+curl -i -X PUT http://localhost:3000/api/projetos/ID \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{"nome":"Projeto de teste (editado)","ano":2026}'
+
+curl -i -X DELETE http://localhost:3000/api/projetos/ID \
+  -H "Authorization: Bearer $TOKEN"
+
+curl -i -X DELETE http://localhost:3000/api/projetos/ID
